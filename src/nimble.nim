@@ -1132,16 +1132,6 @@ when isMainModule:
   var error = ""
   var hint = ""
 
-  try:
-    parseCmdLine().doAction()
-  except NimbleError:
-    let currentExc = (ref NimbleError)(getCurrentException())
-    (error, hint) = getOutputInfo(currentExc)
-  except NimbleQuit:
-    discard
-  finally:
-    removeDir(getNimbleTempDir())
-
   if error.len > 0:
     displayTip()
     display("Error:", error, Error, HighPriority)
